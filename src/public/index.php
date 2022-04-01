@@ -25,6 +25,7 @@ $loader->registerDirs(
     [
         APP_PATH . "/controllers/",
         APP_PATH . "/models/",
+        APP_PATH . "/listeners/",
     ]
 );
 $loader->registerNamespaces(
@@ -72,15 +73,22 @@ $container->set(
             );
         }
 );
+$application = new Application($container);
 $eventsmanager = new EventsManager();
 $eventsmanager->attach(
     'notifications',
     new App\Listeners\NotificationsListeners()
 );
+$eventsmanager->attach(
+    'application:beforeHandleRequest',
+    new App\Listeners\NotificationsListeners()
+);
+
 $container->set(
     'EventsManager',
     $eventsmanager
 );
+$application->seteventsManager($eventsmanager);
 
 // $container->set(
 //     'mongo',
