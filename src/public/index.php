@@ -11,7 +11,7 @@ use Phalcon\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
 use Phalcon\Events\Manager as EventsManager;
-
+require("../vendor/autoload.php");
 $config = new Config([]);
 
 // Define some absolute path constants to aid in locating resources
